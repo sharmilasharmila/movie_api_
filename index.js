@@ -49,10 +49,6 @@ let topTenMovies = [
   }
 ];
 
-// app.get("/movies", (req, res) => {
-//   res.json(topTenMovies);
-// });
-// ---
 app.get("/", (req, res) => {
   res.send("Welcome to myFlix!");
 });
