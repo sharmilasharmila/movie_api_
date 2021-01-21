@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DOCUMENTATION</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>myFlix Project</h1>
+      <h2>Create a REST API with Node.js</h2>
+    </header>
+    <section>
+      <h3>Objective:</h3>
+      <p>To build the server-side component of a "movies" web application.</p>
+      <p>
+        The web application will provide users with access to information about
+        different movies, directors, and genres.
+      </p>
+      <p>
+        Users will be able to sign up, update their personal information, and
+        create a list of their favorite movies.
+      </p>
+    </section>
+    <section>
+      <table>
+        <tr>
+          <th>Business Logic</th>
+          <th>URL Endpoint</th>
+          <th>HTTP Method</th>
+          <th>Request Body</th>
+          <th>Request Example</th>
+          <th>Response Body</th>
+          <th>Response Example</th>
+        </tr>
+        <tr>
+          <td>Get a list of all movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>/movies</td>
+          <td>JSON</td>
+          <td>
+            {<br />"Genre": { <br />"Name": "Feature film soundtrack"<br />"Description":
+            "A soundtrack[2] can be recorded music accompanying and synchronized
+            to the images of a motion picture, book, television program, or
+            video game"<br />}<br /><br />"Director": {<br />"Name": "Yash
+            Chopra",<br />"Bio": "Yash Chopra is an Indian film director,
+            producer, screenwriter",<br />"Born": "1932",<br />"Died": "2012"<br />},<br /><br />"Actors":
+            [Shahrukh Khan],<br /><br />"_id": "2837g2487",<br /><br />"Title":
+            "Veer Zaara",<br /><br />
+            "Description": "Veer-Zaara is a 2004 Indian Hindi-language period
+            romantic drama film."<br /><br />
+            "ImagePath": "Veer-Zaara.jpg"<br /><br />"Featured": true<br />}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Get information about one specific movie by title, use %20 for
+            spaces
+          </td>
+          <td>/movies/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>/movies/Veer%20Zaara</td>
+          <td>JSON</td>
+          <td>
+            {<br />"Genre": { <br />"Name": "Feature film soundtrack"<br />"Description":
+            "A soundtrack[2] can be recorded music accompanying and synchronized
+            to the images of a motion picture, book, television program, or
+            video game"<br />}<br /><br />"Director": {<br />"Name": "Yash
+            Chopra",<br />"Bio": "Yash Chopra is an Indian film director,
+            producer, screenwriter, and actor",<br />"Born": "1932",<br />"Died":
+            "2012"<br />},<br /><br />"Actors": [Shahrukh Khan],<br /><br />"_id":
+            "2837g2487",<br /><br />"Title": "Veer Zaara",<br /><br />
+            "Description": "Veer-Zaara is a 2004 Indian Hindi-language period
+            romantic drama film."<br /><br />
+            "ImagePath": "Veer-Zaara.png"<br /><br />"Featured": true<br />}
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Return data about genre(description) by name/title, use %20 for
+            spaces
+          </td>
+          <td>/movies/genres/:genre</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>/movies/genres/Feature%20film%20soundtrack</td>
+          <td>JSON</td>
+          <td>
+            {<br />"Name": "Feature film soundtrack",<br />"Description": "A
+            soundtrack[2] can be recorded music accompanying and synchronized to
+            the images of a motion picture, book, television program, or video
+            game"<br />}
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a director by name, use %20 for spaces</td>
+          <td>/movies/directors/:name</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>/movies/directors/Yash%20Chopra</td>
+          <td>JSON</td>
+          <td>
+            {<br />"Name": "Yash Chopra",<br />"Bio": "Yash Chopra is an Indian
+            film director, producer, screenwriter, and actor",<br />"Born":
+            "1932",<br />"Died": "2012"<br />}
+          </td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>JSON</td>
+          <td>
+            {<br />"Username": "Sharmila",<br />
+            "Password": "Querty123",<br />"Email": "Sharmila@gmail.com",<br />"Date
+            of Birth": "20/03/1994"<br />}
+          </td>
+          <td>JSON</td>
+          <td>
+            {<br />"Username": "Sharmila",<br />
+            "Password": "Querty123",<br />"Email": "Sharmila@gmail.com",<br />"Date
+            of Birth": "20/03/1994"<br />}
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to update their user information</td>
+          <td>/users/:username</td>
+          <td>PUT</td>
+          <td>JSON</td>
+          <td>
+            {<br />"Username": "Sharmila",<br />
+            "Password": "covid2020",<br />"Email": "Sharmila@gmail.com",<br />"Date
+            of Birth": "20/03/1994"<br />}
+          </td>
+          <td>JSON</td>
+          <td>
+            {<br />"Username": "Sharmila",<br />
+            "Password": "covid2020",<br />"Email": "Sharmila@gmail.com",<br />"Date
+            of Birth": "20/03/1994"<br />}
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to add a movie to their list of favorites</td>
+          <td>/users/:username/movies/:movieID</td>
+          <td>POST</td>
+          <td>JSON</td>
+          <td>{<br />"FavoriteMovies": "155hj127e87"<br />}</td>
+          <td>JSON</td>
+          <td>
+            {<br />
+            "FavoriteMovies": ["155hj127e87"],<br />}
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to remove a movie from their list of favorites</td>
+          <td>/users/:username/movies/:movieID</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>/users/Sharmila/movies/155hj127e87</td>
+          <td>Message</td>
+          <td>
+            "Casino was successfully removed from your list of favorite movies"
+          </td>
+        </tr>
+        <tr>
+          <td>Allow existing users to deregister</td>
+          <td>/users/:username</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>/users/Sharmila</td>
+          <td>Message</td>
+          <td>"User: Sharmila was deleted"</td>
+        </tr>
+      </table>
+    </section>
+  </body>
+</html>
