@@ -17,7 +17,8 @@ mongoose.connect('mongodb://localhost:27017/MyFlixDB', { useNewUrlParser: true, 
 // mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 //Middleware functions
-//let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
+// Give permission to Cross oriin resource Sharing 
+// let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -29,7 +30,26 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));
+})); 
+
+// Hashing
+const bcrypt = require('bcrypt');
+
+let userSchema = mongoose.Schema({
+  Username: {type: String, required: true},
+  Password: {type: String, required: true},
+  Email: {type: String, required: true},
+  Birthday: Date,
+  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
+});
+
+userSchema.statics.hashPassword = (password) => {
+  return bcrypt.hashSync(password, 10);
+};
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.Password);
+}; 
 
 app.use(morgan('common'));
 app.use(express.static('public'));
