@@ -37,28 +37,14 @@ app.use(cors({
 // Hashing
 const bcrypt = require('bcrypt');
 
-let userSchema = mongoose.Schema({
-  Username: {type: String, required: true},
-  Password: {type: String, required: true},
-  Email: {type: String, required: true},
-  Birthday: Date,
-  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
-});
-
-userSchema.statics.hashPassword = (password) => {
-  return bcrypt.hashSync(password, 10);
-};
-
-userSchema.methods.validatePassword = function(password) {
-  return bcrypt.compareSync(password, this.Password);
-}; 
-
 app.use(morgan('common'));
 app.use(express.static('public'));
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('You done messed something up!');
 });
+
 app.use(bodyParser.json());
 
 let auth = require('./auth')(app);
