@@ -1,9 +1,10 @@
+// comment
 const express = require('express'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
   Models = require('./models');
-  
+
 require('dotenv').config();
 
 const cors = require('cors');
@@ -19,7 +20,7 @@ const app = express();
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 //Middleware functions
-// Give permission to Cross oriin resource Sharing 
+// Give permission to Cross oriin resource Sharing
 // let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 
 app.use(cors({
@@ -32,7 +33,7 @@ app.use(cors({
     }
     return callback(null, true);
   }
-})); 
+}));
 
 // Hashing
 const bcrypt = require('bcrypt');
