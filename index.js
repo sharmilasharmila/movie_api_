@@ -23,7 +23,9 @@ const passport = require('passport');
 require('./passport');
 
 const cors = require('cors');
-app.use(cors());    // allows requests from all origins
+app.use(cors()); 
+
+let allowedOrigins = ['https://sharmilamovie.herokuapp.com/', 'http://localhost:8080', 'http://localhost:1234'];// allows requests from all origins
 
 const { check, validationResult } = require('express-validator');
 
