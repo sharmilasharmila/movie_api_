@@ -21,8 +21,8 @@ const Users = Models.User;
 
 app.use(morgan('common'));
 
-// let allowedOrigins = ['https://sharmilamovie.herokuapp.com/', 'http://localhost:8080', 'http://localhost:1234'];
-let allowedOrigins = '*';
+let allowedOrigins = ['https://sharmilamovie.herokuapp.com/', 'http://localhost:8080', 'http://localhost:1234', 'http://localhost:3790'];
+//let allowedOrigins = '*';
 
 app.use(cors({
   origin: (origin, callback) => {
