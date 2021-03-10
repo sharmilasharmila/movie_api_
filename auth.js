@@ -5,14 +5,6 @@ const jwt = require('jsonwebtoken'),
 
 require('./passport');
 
-let generateJWTToken = (user) => {
-  return jwt.sign(user, jwtSecret, {
-    subject: user.Username, 
-    expiresIn: '7d', 
-    algorithm: 'HS256' 
-  });
-}
-
 //POST request for logins
 module.exports = (router) => {
   router.post('/login', (req, res) => {
@@ -33,3 +25,12 @@ module.exports = (router) => {
     })(req, res);
   });
 }
+
+let generateJWTToken = (user) => {
+  return jwt.sign(user, jwtSecret, {
+    subject: user.Username, 
+    expiresIn: '7d', 
+    algorithm: 'HS256' 
+  });
+}
+
