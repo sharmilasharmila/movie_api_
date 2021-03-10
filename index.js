@@ -53,6 +53,8 @@ app.get('/', (req, res) => {
   Email: String,
   Birthday: Date
 }*/
+
+
 app.post('/users',
   // Validation logic here for request
   //you can either use a chain of methods like .not().isEmpty()
