@@ -90,8 +90,8 @@ app.post('/movies', (req, res) => {
                 Title: req.body.Title,
                 Description: req.body.Description,
                 Genre: {
-                    Name: req.body.Genrename,
-                    Description: req.body.Genredescription
+                    Name: req.body.Genre.Name,
+                    Description: req.body.Genre.Description
                 },
                 Director: {
                     Name: req.body.Name,
