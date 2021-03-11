@@ -117,8 +117,8 @@ app.delete('/movies/:Title', passport.authenticate('jwt', { session: false }), (
     Users.findOneAndRemove({
         Title: req.params.Title
     })
-        .then((user) => {
-            if (!user) {
+        .then((movies) => {
+            if (!movies) {
                 res.status(400).send(req.params.Title + ' was not found.');
             } else {
                 res.status(200).send(req.params.Title + ' was deleted.');
