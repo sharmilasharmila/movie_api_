@@ -114,11 +114,11 @@ app.post('/movies', (req, res) => {
 
 //Delete Movies
 app.delete('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.findOneAndRemove({
+    Movies.findOneAndRemove({
         Title: req.params.Title
     })
-        .then((movies) => {
-            if (!movies) {
+        .then((movie) => {
+            if (!movie) {
                 res.status(400).send(req.params.Title + ' was not found.');
             } else {
                 res.status(200).send(req.params.Title + ' was deleted.');
