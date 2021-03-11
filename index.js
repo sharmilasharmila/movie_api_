@@ -81,11 +81,7 @@ app.get('/movies/Directors/:Name', passport.authenticate('jwt', { session: false
 
 // Add movies
 app.post('/movies', (req, res) => {
-    Movies.findOne({Title: req.params.Title})
-    .then((movie) => {
-        if (movie) { //if the user is found, send a response that it already exists
-            return res.status(400).send(req.params.Title + ' already exists');
-        } else {
+
             Movies.create({
                 Title: req.body.Title,
                 Description: req.body.Description,
@@ -108,9 +104,6 @@ app.post('/movies', (req, res) => {
                     res.status(500).send('Error: ' + error);
                 });
         }
-    })
-}
-)
 
 //Allows (post) new user registration
 app.post('/users',
