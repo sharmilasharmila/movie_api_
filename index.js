@@ -112,6 +112,24 @@ app.post('/movies', (req, res) => {
 }
 )
 
+//Delete Movies
+app.delete('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Users.findOneAndRemove({
+        Title: req.params.Title
+    })
+        .then((user) => {
+            if (!user) {
+                res.status(400).send(req.params.Title + ' was not found.');
+            } else {
+                res.status(200).send(req.params.Title + ' was deleted.');
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});
+
 //Allows (post) new user registration
 app.post('/users',
     [
