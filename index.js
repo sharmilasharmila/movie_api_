@@ -80,7 +80,7 @@ app.get('/movies/Directors/:Name', passport.authenticate('jwt', { session: false
 });
 
 // Add movies
-app.post('/movies', (req, res) => {
+app.post('/movies',passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({Title: req.body.Title})
     .then((movie) => {
         if (movie) { //if the user is found, send a response that it already exists
