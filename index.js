@@ -11,6 +11,7 @@ const Users = Models.User;
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+
 const app = express();
 
 app.use(morgan('common'));
@@ -26,6 +27,7 @@ const cors = require('cors');
 app.use(cors());    // allows requests from all origins
 
 const { check, validationResult } = require('express-validator');
+let allowedOrigins = ['https://sharmilamovie.herokuapp.com/', 'http://localhost:8080', 'http://localhost:1234', 'http://localhost:4550'];
 
 app.get('/', (req, res) => {
     res.send('Welcome to myFlix!');
