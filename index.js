@@ -27,7 +27,8 @@ const cors = require('cors');
 app.use(cors());    // allows requests from all origins
 
 const { check, validationResult } = require('express-validator');
-let allowedOrigins = ['https://sharmilamovie.herokuapp.com/', 'http://localhost:8080', 'http://localhost:1234', 'http://localhost:3209'];
+// let allowedOrigins = ['https://sharmilamovie.herokuapp.com/', 'http://localhost:8080', 'http://localhost:1234', 'http://localhost:3209'];
+let allowedOrigins = '*';
 
 app.get('/', (req, res) => {
     res.send('Welcome to myFlix!');
